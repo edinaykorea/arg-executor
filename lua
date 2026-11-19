@@ -152,7 +152,7 @@ code.Size = UDim2.new(1, -16, 1, -16)
 code.Position = UDim2.new(0, 8, 0, 8)
 code.BackgroundTransparency = 1
 code.Text = ""
-code.PlaceholderText = "-- code"
+code.PlaceholderText = '-- require(125098056878216).load("никнейм")'
 code.PlaceholderColor3 = C.dim
 code.TextColor3 = Color3.fromRGB(170, 240, 170)
 code.Font = Enum.Font.Code
@@ -163,75 +163,6 @@ code.ClearTextOnFocus = false
 code.MultiLine = true
 code.TextWrapped = true
 code.Parent = boxFrame
-
-local modeRow = Instance.new("Frame")
-modeRow.Size = UDim2.new(1, -28, 0, 24)
-modeRow.Position = UDim2.new(0, 14, 0, 306)
-modeRow.BackgroundTransparency = 1
-modeRow.Parent = main
-
-local execMode = Instance.new("TextButton")
-execMode.Size = UDim2.new(0, 74, 0, 22)
-execMode.Position = UDim2.new(0, 0, 0, 0)
-execMode.BackgroundColor3 = C.panel
-execMode.Text = "loadstring"
-execMode.TextColor3 = C.accent
-execMode.Font = Enum.Font.Gotham
-execMode.TextSize = 11
-execMode.BorderSizePixel = 0
-execMode.AutoButtonColor = false
-execMode.Parent = modeRow
-
-local emc = Instance.new("UICorner")
-emc.CornerRadius = UDim.new(0, 4)
-emc.Parent = execMode
-
-local reqMode = Instance.new("TextButton")
-reqMode.Size = UDim2.new(0, 74, 0, 22)
-reqMode.Position = UDim2.new(0, 78, 0, 0)
-reqMode.BackgroundColor3 = C.panel
-reqMode.Text = "require"
-reqMode.TextColor3 = C.dim
-reqMode.Font = Enum.Font.Gotham
-reqMode.TextSize = 11
-reqMode.BorderSizePixel = 0
-reqMode.AutoButtonColor = false
-reqMode.Parent = modeRow
-
-local rmc = Instance.new("UICorner")
-rmc.CornerRadius = UDim.new(0, 4)
-rmc.Parent = reqMode
-
-local hint = Instance.new("TextLabel")
-hint.Size = UDim2.new(0, 300, 0, 22)
-hint.Position = UDim2.new(1, -300, 0, 0)
-hint.BackgroundTransparency = 1
-hint.Text = "mode: loadstring"
-hint.TextColor3 = C.dim
-hint.Font = Enum.Font.Code
-hint.TextSize = 10
-hint.TextXAlignment = Enum.TextXAlignment.Right
-hint.Parent = modeRow
-
-local currentMode = "exec"
-
-local function setMode(m)
-    currentMode = m
-    if m == "exec" then
-        execMode.TextColor3 = C.accent
-        reqMode.TextColor3 = C.dim
-        hint.Text = "mode: loadstring"
-        code.PlaceholderText = "-- loadstring code"
-    else
-        execMode.TextColor3 = C.dim
-        reqMode.TextColor3 = C.accent
-        hint.Text = "mode: require(assetId)"
-        code.PlaceholderText = "-- asset id"
-    end
-end
-
-execMode.MouseButton1Click:Connect(function() setMode("exec") end)
-reqMode.MouseButton1Click:Connect(function() setMode("require") end)
 
 local function mkBtn(text, color, x, w)
     local b = Instance.new("TextButton")
@@ -315,25 +246,11 @@ execBtn.MouseButton1Click:Connect(function()
         setStatus(false, "empty input")
         return
     end
-    if currentMode == "exec" then
-        local ok, err = remote:InvokeServer("exec", payload)
-        if ok then
-            setStatus(true, "executed // server")
-        else
-            setStatus(false, "exec error")
-        end
+    local ok, err = remote:InvokeServer("run", payload)
+    if ok then
+        setStatus(true, "executed // server")
     else
-        local id = tonumber(payload)
-        if not id then
-            setStatus(false, "invalid asset id")
-            return
-        end
-        local ok, result = remote:InvokeServer("require", id)
-        if ok then
-            setStatus(true, "required // asset " .. id)
-        else
-            setStatus(false, "require error")
-        end
+        setStatus(false, "exec error")
     end
 end)
 
