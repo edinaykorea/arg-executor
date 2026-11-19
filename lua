@@ -285,19 +285,23 @@ end
 
 loadBtn.MouseButton1Click:Connect(function()
     local r = ReplicatedStorage:FindFirstChild("SyncHandler")
-    if r and r:IsA("RemoteFunction") then
-        remote = r
-        connected = true
-        local ok, res = remote:InvokeServer("ping")
-        if ok then
-            setStatus(true, "connected // SyncHandler")
-        else
-            setStatus(false, "handshake failed")
-            connected = false
-        end
-    else
+    if not r or not r:IsA("RemoteFunction") then
         connected = false
         setStatus(false, "remote not found")
+        return
+    end
+
+    remote = r
+    local ok, res = pcall(function()
+        return remote:InvokeServer("ping")
+    end)
+
+    if ok and res == true then
+        connected = true
+        setStatus(true, "connected // SyncHandler")
+    else
+        connected = false
+        setStatus(false, "handshake failed")
     end
 end)
 
