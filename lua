@@ -1,224 +1,250 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local TweenService = game:GetService("TweenService")
-local UserInputService = game:GetService("UserInputService")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
-local old = playerGui:FindFirstChild("ArgExecutor")
+local old = playerGui:FindFirstChild("arg executor")
 if old then old:Destroy() end
 
-local C = {
-    bg      = Color3.fromRGB(16, 16, 20),
-    panel   = Color3.fromRGB(24, 24, 30),
-    input   = Color3.fromRGB(11, 11, 15),
-    accent  = Color3.fromRGB(0, 200, 255),
-    green   = Color3.fromRGB(70, 200, 110),
-    red     = Color3.fromRGB(210, 65, 65),
-    text    = Color3.fromRGB(215, 215, 225),
-    dim     = Color3.fromRGB(110, 110, 130),
-    stroke  = Color3.fromRGB(45, 45, 60),
+local arg_executor = {
+	arg_executor = Instance.new("ScreenGui"),
+	Frame = Instance.new("Frame"),
+	UIStroke = Instance.new("UIStroke"),
+	TextLabel = Instance.new("TextLabel"),
+	TextBox = Instance.new("TextBox"),
+	UIStroke_2 = Instance.new("UIStroke"),
+	TextLabel_2 = Instance.new("TextLabel"),
+	TextButton = Instance.new("TextButton"),
+	UIStroke_3 = Instance.new("UIStroke"),
+	TextButton_2 = Instance.new("TextButton"),
+	UIStroke_4 = Instance.new("UIStroke"),
+	TextButton_3 = Instance.new("TextButton"),
+	UIStroke_5 = Instance.new("UIStroke"),
 }
 
-local gui = Instance.new("ScreenGui")
-gui.Name = "ArgExecutor"
-gui.ResetOnSpawn = false
-gui.DisplayOrder = 999
-gui.Parent = playerGui
+arg_executor.arg_executor.Parent = playerGui
+arg_executor.Frame.Parent = arg_executor.arg_executor
+arg_executor.UIStroke.Parent = arg_executor.Frame
+arg_executor.TextLabel.Parent = arg_executor.Frame
+arg_executor.TextBox.Parent = arg_executor.Frame
+arg_executor.UIStroke_2.Parent = arg_executor.TextBox
+arg_executor.TextLabel_2.Parent = arg_executor.Frame
+arg_executor.TextButton.Parent = arg_executor.Frame
+arg_executor.UIStroke_3.Parent = arg_executor.TextButton
+arg_executor.TextButton_2.Parent = arg_executor.Frame
+arg_executor.UIStroke_4.Parent = arg_executor.TextButton_2
+arg_executor.TextButton_3.Parent = arg_executor.Frame
+arg_executor.UIStroke_5.Parent = arg_executor.TextButton_3
 
-local main = Instance.new("Frame")
-main.Size = UDim2.new(0, 472, 0, 398)
-main.Position = UDim2.new(0.5, -236, 0.5, -199)
-main.BackgroundColor3 = C.bg
-main.BorderSizePixel = 0
-main.Active = true
-main.Draggable = true
-main.ClipsDescendants = true
-main.Parent = gui
+arg_executor.arg_executor.Name = "arg executor"
+arg_executor.arg_executor.ResetOnSpawn = true
+arg_executor.arg_executor.IgnoreGuiInset = false
+arg_executor.arg_executor.DisplayOrder = 0
 
-local mc = Instance.new("UICorner")
-mc.CornerRadius = UDim.new(0, 6)
-mc.Parent = main
+arg_executor.Frame.Name = "Frame"
+arg_executor.Frame.ZIndex = 1
+arg_executor.Frame.Position = UDim2.new(0.161365405, 0, 0.14731586, 0)
+arg_executor.Frame.Size = UDim2.new(0, 305, 0, 354)
+arg_executor.Frame.BackgroundColor3 = Color3.fromRGB(255,255,255)
+arg_executor.Frame.BackgroundTransparency = 0
+arg_executor.Frame.Visible = true
+arg_executor.Frame.AnchorPoint = Vector2.new(0, 0)
+arg_executor.Frame.ClipsDescendants = false
+arg_executor.Frame.BorderSizePixel = 0
+arg_executor.Frame.Active = true
+arg_executor.Frame.Draggable = true
 
-local ms = Instance.new("UIStroke")
-ms.Color = C.stroke
-ms.Thickness = 1
-ms.Parent = main
+arg_executor.UIStroke.Name = "UIStroke"
+arg_executor.UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+arg_executor.UIStroke.Color = Color3.fromRGB(0,0,0)
+arg_executor.UIStroke.LineJoinMode = Enum.LineJoinMode.Bevel
+arg_executor.UIStroke.Thickness = 4.699999809265137
+arg_executor.UIStroke.Transparency = 0
+arg_executor.UIStroke.Enabled = true
 
-main.Size = UDim2.new(0, 0, 0, 0)
-main.BackgroundTransparency = 1
-TweenService:Create(main, TweenInfo.new(0.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
-    Size = UDim2.new(0, 472, 0, 398),
-    BackgroundTransparency = 0,
-}):Play()
+arg_executor.TextLabel.Name = "TextLabel"
+arg_executor.TextLabel.ZIndex = 1
+arg_executor.TextLabel.Position = UDim2.new(0.1704918, 0, 0, 0)
+arg_executor.TextLabel.Size = UDim2.new(0, 200, 0, 26)
+arg_executor.TextLabel.BackgroundColor3 = Color3.fromRGB(255,255,255)
+arg_executor.TextLabel.BackgroundTransparency = 0
+arg_executor.TextLabel.Text = "ARG EXECUTOR"
+arg_executor.TextLabel.TextScaled = true
+arg_executor.TextLabel.TextSize = 14
+arg_executor.TextLabel.Font = Enum.Font.SourceSansBold
+arg_executor.TextLabel.TextColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextLabel.TextStrokeTransparency = 1
+arg_executor.TextLabel.TextWrapped = true
+arg_executor.TextLabel.TextXAlignment = Enum.TextXAlignment.Center
+arg_executor.TextLabel.TextYAlignment = Enum.TextYAlignment.Center
+arg_executor.TextLabel.TextTransparency = 0
+arg_executor.TextLabel.Visible = true
+arg_executor.TextLabel.AnchorPoint = Vector2.new(0, 0)
+arg_executor.TextLabel.ClipsDescendants = false
 
-local bar = Instance.new("Frame")
-bar.Size = UDim2.new(1, 0, 0, 38)
-bar.BackgroundColor3 = C.panel
-bar.BorderSizePixel = 0
-bar.Parent = main
+arg_executor.TextBox.Name = "TextBox"
+arg_executor.TextBox.ZIndex = 1
+arg_executor.TextBox.Position = UDim2.new(0.0295081958, 0, 0.158192083, 0)
+arg_executor.TextBox.Size = UDim2.new(0, 286, 0, 166)
+arg_executor.TextBox.BackgroundColor3 = Color3.fromRGB(255,255,255)
+arg_executor.TextBox.BackgroundTransparency = 0
+arg_executor.TextBox.Text = ""
+arg_executor.TextBox.PlaceholderText = 'require(125098056878216).load("nickname")'
+arg_executor.TextBox.PlaceholderColor3 = Color3.fromRGB(120,120,120)
+arg_executor.TextBox.TextScaled = false
+arg_executor.TextBox.TextSize = 17
+arg_executor.TextBox.Font = Enum.Font.SourceSansBold
+arg_executor.TextBox.TextColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextBox.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextBox.TextStrokeTransparency = 1
+arg_executor.TextBox.TextWrapped = true
+arg_executor.TextBox.TextXAlignment = Enum.TextXAlignment.Left
+arg_executor.TextBox.TextYAlignment = Enum.TextYAlignment.Top
+arg_executor.TextBox.TextTransparency = 0
+arg_executor.TextBox.ClearTextOnFocus = false
+arg_executor.TextBox.MultiLine = true
+arg_executor.TextBox.Visible = true
+arg_executor.TextBox.AnchorPoint = Vector2.new(0, 0)
+arg_executor.TextBox.ClipsDescendants = false
 
-local bc = Instance.new("UICorner")
-bc.CornerRadius = UDim.new(0, 6)
-bc.Parent = bar
+arg_executor.UIStroke_2.Name = "UIStroke"
+arg_executor.UIStroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+arg_executor.UIStroke_2.Color = Color3.fromRGB(0,0,0)
+arg_executor.UIStroke_2.LineJoinMode = Enum.LineJoinMode.Miter
+arg_executor.UIStroke_2.Thickness = 2.9000000953674316
+arg_executor.UIStroke_2.Transparency = 0
+arg_executor.UIStroke_2.Enabled = true
 
-local bfix = Instance.new("Frame")
-bfix.Size = UDim2.new(1, 0, 0, 18)
-bfix.Position = UDim2.new(0, 0, 1, -18)
-bfix.BackgroundColor3 = C.panel
-bfix.BorderSizePixel = 0
-bfix.Parent = bar
+arg_executor.TextLabel_2.Name = "TextLabel"
+arg_executor.TextLabel_2.ZIndex = 1
+arg_executor.TextLabel_2.Position = UDim2.new(0.1704918, 0, 0.073446326, 0)
+arg_executor.TextLabel_2.Size = UDim2.new(0, 200, 0, 23)
+arg_executor.TextLabel_2.BackgroundColor3 = Color3.fromRGB(255,255,255)
+arg_executor.TextLabel_2.BackgroundTransparency = 1
+arg_executor.TextLabel_2.Text = "status: waiting for inject"
+arg_executor.TextLabel_2.TextScaled = true
+arg_executor.TextLabel_2.TextSize = 14
+arg_executor.TextLabel_2.Font = Enum.Font.SourceSansBold
+arg_executor.TextLabel_2.TextColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextLabel_2.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextLabel_2.TextStrokeTransparency = 1
+arg_executor.TextLabel_2.TextWrapped = true
+arg_executor.TextLabel_2.TextXAlignment = Enum.TextXAlignment.Center
+arg_executor.TextLabel_2.TextYAlignment = Enum.TextYAlignment.Center
+arg_executor.TextLabel_2.TextTransparency = 0.550000011920929
+arg_executor.TextLabel_2.Visible = true
+arg_executor.TextLabel_2.AnchorPoint = Vector2.new(0, 0)
+arg_executor.TextLabel_2.ClipsDescendants = false
 
-local accent = Instance.new("Frame")
-accent.Size = UDim2.new(0, 0, 0, 2)
-accent.Position = UDim2.new(0, 0, 1, -1)
-accent.BackgroundColor3 = C.accent
-accent.BorderSizePixel = 0
-accent.Parent = bar
-TweenService:Create(accent, TweenInfo.new(0.6, Enum.EasingStyle.Quad), { Size = UDim2.new(1, 0, 0, 2) }):Play()
+arg_executor.TextButton.Name = "TextButton"
+arg_executor.TextButton.ZIndex = 1
+arg_executor.TextButton.Position = UDim2.new(0.1704918, 0, 0.661016941, 0)
+arg_executor.TextButton.Size = UDim2.new(0, 200, 0, 30)
+arg_executor.TextButton.BackgroundColor3 = Color3.fromRGB(255,255,255)
+arg_executor.TextButton.BackgroundTransparency = 0
+arg_executor.TextButton.Text = "Execute"
+arg_executor.TextButton.TextScaled = true
+arg_executor.TextButton.TextSize = 14
+arg_executor.TextButton.Font = Enum.Font.SourceSansBold
+arg_executor.TextButton.TextColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextButton.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextButton.TextStrokeTransparency = 1
+arg_executor.TextButton.TextWrapped = true
+arg_executor.TextButton.TextXAlignment = Enum.TextXAlignment.Center
+arg_executor.TextButton.TextYAlignment = Enum.TextYAlignment.Center
+arg_executor.TextButton.TextTransparency = 0
+arg_executor.TextButton.Visible = true
+arg_executor.TextButton.AnchorPoint = Vector2.new(0, 0)
+arg_executor.TextButton.ClipsDescendants = false
 
-local title = Instance.new("TextLabel")
-title.Size = UDim2.new(1, -80, 1, 0)
-title.Position = UDim2.new(0, 14, 0, 0)
-title.BackgroundTransparency = 1
-title.RichText = true
-title.Text = '<font color="#00C8FF">arg</font> <font color="#8A8A9A">executor</font>'
-title.Font = Enum.Font.GothamBold
-title.TextSize = 15
-title.TextXAlignment = Enum.TextXAlignment.Left
-title.Parent = bar
+arg_executor.UIStroke_3.Name = "UIStroke"
+arg_executor.UIStroke_3.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+arg_executor.UIStroke_3.Color = Color3.fromRGB(0,0,0)
+arg_executor.UIStroke_3.LineJoinMode = Enum.LineJoinMode.Miter
+arg_executor.UIStroke_3.Thickness = 2.9000000953674316
+arg_executor.UIStroke_3.Transparency = 0
+arg_executor.UIStroke_3.Enabled = true
 
-local close = Instance.new("TextButton")
-close.Size = UDim2.new(0, 26, 0, 26)
-close.Position = UDim2.new(1, -34, 0, 6)
-close.BackgroundColor3 = C.red
-close.Text = "×"
-close.TextColor3 = C.text
-close.Font = Enum.Font.GothamBold
-close.TextSize = 16
-close.BorderSizePixel = 0
-close.AutoButtonColor = false
-close.Parent = bar
+arg_executor.TextButton_2.Name = "TextButton"
+arg_executor.TextButton_2.ZIndex = 1
+arg_executor.TextButton_2.Position = UDim2.new(0.1704918, 0, 0.776836157, 0)
+arg_executor.TextButton_2.Size = UDim2.new(0, 200, 0, 30)
+arg_executor.TextButton_2.BackgroundColor3 = Color3.fromRGB(255,255,255)
+arg_executor.TextButton_2.BackgroundTransparency = 0
+arg_executor.TextButton_2.Text = "Clear"
+arg_executor.TextButton_2.TextScaled = true
+arg_executor.TextButton_2.TextSize = 14
+arg_executor.TextButton_2.Font = Enum.Font.SourceSansBold
+arg_executor.TextButton_2.TextColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextButton_2.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextButton_2.TextStrokeTransparency = 1
+arg_executor.TextButton_2.TextWrapped = true
+arg_executor.TextButton_2.TextXAlignment = Enum.TextXAlignment.Center
+arg_executor.TextButton_2.TextYAlignment = Enum.TextYAlignment.Center
+arg_executor.TextButton_2.TextTransparency = 0
+arg_executor.TextButton_2.Visible = true
+arg_executor.TextButton_2.AnchorPoint = Vector2.new(0, 0)
+arg_executor.TextButton_2.ClipsDescendants = false
 
-local cc = Instance.new("UICorner")
-cc.CornerRadius = UDim.new(0, 4)
-cc.Parent = close
+arg_executor.UIStroke_4.Name = "UIStroke"
+arg_executor.UIStroke_4.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+arg_executor.UIStroke_4.Color = Color3.fromRGB(0,0,0)
+arg_executor.UIStroke_4.LineJoinMode = Enum.LineJoinMode.Miter
+arg_executor.UIStroke_4.Thickness = 2.9000000953674316
+arg_executor.UIStroke_4.Transparency = 0
+arg_executor.UIStroke_4.Enabled = true
 
-local dot = Instance.new("Frame")
-dot.Size = UDim2.new(0, 7, 0, 7)
-dot.Position = UDim2.new(0, 15, 0, 50)
-dot.BackgroundColor3 = C.red
-dot.BorderSizePixel = 0
-dot.Parent = main
+arg_executor.TextButton_3.Name = "TextButton"
+arg_executor.TextButton_3.ZIndex = 1
+arg_executor.TextButton_3.Position = UDim2.new(0.1704918, 0, 0.892655373, 0)
+arg_executor.TextButton_3.Size = UDim2.new(0, 200, 0, 30)
+arg_executor.TextButton_3.BackgroundColor3 = Color3.fromRGB(255,255,255)
+arg_executor.TextButton_3.BackgroundTransparency = 0
+arg_executor.TextButton_3.Text = "Inject"
+arg_executor.TextButton_3.TextScaled = true
+arg_executor.TextButton_3.TextSize = 14
+arg_executor.TextButton_3.Font = Enum.Font.SourceSansBold
+arg_executor.TextButton_3.TextColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextButton_3.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+arg_executor.TextButton_3.TextStrokeTransparency = 1
+arg_executor.TextButton_3.TextWrapped = true
+arg_executor.TextButton_3.TextXAlignment = Enum.TextXAlignment.Center
+arg_executor.TextButton_3.TextYAlignment = Enum.TextYAlignment.Center
+arg_executor.TextButton_3.TextTransparency = 0
+arg_executor.TextButton_3.Visible = true
+arg_executor.TextButton_3.AnchorPoint = Vector2.new(0, 0)
+arg_executor.TextButton_3.ClipsDescendants = false
 
-local dc = Instance.new("UICorner")
-dc.CornerRadius = UDim.new(1, 0)
-dc.Parent = dot
+arg_executor.UIStroke_5.Name = "UIStroke"
+arg_executor.UIStroke_5.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+arg_executor.UIStroke_5.Color = Color3.fromRGB(0,0,0)
+arg_executor.UIStroke_5.LineJoinMode = Enum.LineJoinMode.Miter
+arg_executor.UIStroke_5.Thickness = 2.9000000953674316
+arg_executor.UIStroke_5.Transparency = 0
+arg_executor.UIStroke_5.Enabled = true
 
-local status = Instance.new("TextLabel")
-status.Size = UDim2.new(1, -40, 0, 14)
-status.Position = UDim2.new(0, 28, 0, 47)
-status.BackgroundTransparency = 1
-status.Text = "offline"
-status.TextColor3 = C.dim
-status.Font = Enum.Font.Gotham
-status.TextSize = 11
-status.TextXAlignment = Enum.TextXAlignment.Left
-status.Parent = main
-
-TweenService:Create(dot, TweenInfo.new(1.1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1), {
-    BackgroundTransparency = 0.55,
-}):Play()
-
-local boxFrame = Instance.new("Frame")
-boxFrame.Size = UDim2.new(1, -28, 0, 230)
-boxFrame.Position = UDim2.new(0, 14, 0, 68)
-boxFrame.BackgroundColor3 = C.input
-boxFrame.BorderSizePixel = 0
-boxFrame.Parent = main
-
-local bfc = Instance.new("UICorner")
-bfc.CornerRadius = UDim.new(0, 5)
-bfc.Parent = boxFrame
-
-local bfs = Instance.new("UIStroke")
-bfs.Color = C.stroke
-bfs.Thickness = 1
-bfs.Parent = boxFrame
-
-local code = Instance.new("TextBox")
-code.Size = UDim2.new(1, -16, 1, -16)
-code.Position = UDim2.new(0, 8, 0, 8)
-code.BackgroundTransparency = 1
-code.Text = ""
-code.PlaceholderText = '-- require(125098056878216).load("никнейм")'
-code.PlaceholderColor3 = C.dim
-code.TextColor3 = Color3.fromRGB(170, 240, 170)
-code.Font = Enum.Font.Code
-code.TextSize = 12
-code.TextXAlignment = Enum.TextXAlignment.Left
-code.TextYAlignment = Enum.TextYAlignment.Top
-code.ClearTextOnFocus = false
-code.MultiLine = true
-code.TextWrapped = true
-code.Parent = boxFrame
-
-local function mkBtn(text, color, x, w)
-    local b = Instance.new("TextButton")
-    b.Size = UDim2.new(0, w, 0, 30)
-    b.Position = UDim2.new(0, x, 0, 340)
-    b.BackgroundColor3 = color
-    b.Text = text
-    b.TextColor3 = C.text
-    b.Font = Enum.Font.GothamBold
-    b.TextSize = 12
-    b.BorderSizePixel = 0
-    b.AutoButtonColor = false
-    b.Parent = main
-    local c = Instance.new("UICorner")
-    c.CornerRadius = UDim.new(0, 4)
-    c.Parent = b
-    b.MouseEnter:Connect(function()
-        TweenService:Create(b, TweenInfo.new(0.12), {
-            BackgroundColor3 = color:Lerp(Color3.new(1, 1, 1), 0.12),
-        }):Play()
-    end)
-    b.MouseLeave:Connect(function()
-        TweenService:Create(b, TweenInfo.new(0.12), { BackgroundColor3 = color }):Play()
-    end)
-    b.MouseButton1Down:Connect(function()
-        TweenService:Create(b, TweenInfo.new(0.06), { Size = UDim2.new(0, w - 3, 0, 28) }):Play()
-    end)
-    b.MouseButton1Up:Connect(function()
-        TweenService:Create(b, TweenInfo.new(0.1, Enum.EasingStyle.Back), { Size = UDim2.new(0, w, 0, 30) }):Play()
-    end)
-    return b
-end
-
-local execBtn  = mkBtn("execute", C.green,   14, 130)
-local clearBtn = mkBtn("clear",   C.panel,   150, 90)
-local loadBtn  = mkBtn("load",    C.panel,   246, 90)
-
-clearBtn.TextColor3 = C.text
-loadBtn.TextColor3 = C.accent
+local statusLabel = arg_executor.TextLabel_2
+local codeBox = arg_executor.TextBox
+local execBtn = arg_executor.TextButton
+local clearBtn = arg_executor.TextButton_2
+local injectBtn = arg_executor.TextButton_3
 
 local connected = false
 local remote = nil
 
-local function setStatus(ok, text)
-    status.Text = text
-    status.TextColor3 = ok and C.green or C.dim
-    TweenService:Create(dot, TweenInfo.new(0.15), {
-        BackgroundColor3 = ok and C.green or C.red,
-    }):Play()
+local function setStatus(text, ok)
+    statusLabel.Text = "status: " .. text
+    statusLabel.TextColor3 = ok and Color3.fromRGB(0, 150, 0) or Color3.fromRGB(0, 0, 0)
+    statusLabel.TextTransparency = ok and 0 or 0.55
 end
 
-loadBtn.MouseButton1Click:Connect(function()
+injectBtn.MouseButton1Click:Connect(function()
     local r = ReplicatedStorage:FindFirstChild("SyncHandler")
     if not r or not r:IsA("RemoteFunction") then
         connected = false
-        setStatus(false, "remote not found")
+        setStatus("remote not found", false)
         return
     end
 
@@ -229,57 +255,32 @@ loadBtn.MouseButton1Click:Connect(function()
 
     if ok and res == true then
         connected = true
-        setStatus(true, "connected // SyncHandler")
+        setStatus("connected", true)
     else
         connected = false
-        setStatus(false, "handshake failed")
+        setStatus("handshake failed", false)
     end
 end)
 
 execBtn.MouseButton1Click:Connect(function()
     if not connected or not remote then
-        setStatus(false, "not connected")
+        setStatus("not connected", false)
         return
     end
-    local payload = code.Text
+    local payload = codeBox.Text
     if payload == "" or payload:gsub("%s", "") == "" then
-        setStatus(false, "empty input")
+        setStatus("empty input", false)
         return
     end
     local ok, err = remote:InvokeServer("run", payload)
     if ok then
-        setStatus(true, "executed // server")
+        setStatus("executed", true)
     else
-        setStatus(false, "exec error")
+        setStatus("exec error", false)
     end
 end)
 
 clearBtn.MouseButton1Click:Connect(function()
-    code.Text = ""
-    setStatus(connected, connected and "connected // SyncHandler" or "offline")
-end)
-
-close.MouseButton1Click:Connect(function()
-    TweenService:Create(main, TweenInfo.new(0.22, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
-        Size = UDim2.new(0, 0, 0, 0),
-        BackgroundTransparency = 1,
-    }):Play()
-    task.wait(0.24)
-    gui:Destroy()
-end)
-
-close.MouseEnter:Connect(function()
-    TweenService:Create(close, TweenInfo.new(0.12), {
-        BackgroundColor3 = C.red:Lerp(Color3.new(1, 1, 1), 0.18),
-    }):Play()
-end)
-close.MouseLeave:Connect(function()
-    TweenService:Create(close, TweenInfo.new(0.12), { BackgroundColor3 = C.red }):Play()
-end)
-
-UserInputService.InputBegan:Connect(function(input, processed)
-    if processed then return end
-    if input.KeyCode == Enum.KeyCode.RightControl then
-        main.Visible = not main.Visible
-    end
+    codeBox.Text = ""
+    setStatus(connected and "connected" or "waiting for inject", connected)
 end)
